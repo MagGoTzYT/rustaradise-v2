@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rustaradise · Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body onload="initBlogPage()">
+    <div class="page">
+      <header class="nav">
+        <div class="nav-inner">
+          <div class="brand">
+            <div class="brand-mark">RZ</div>
+            <div>
+              <div class="brand-text-title">Rustaradise</div>
+              <div class="brand-text-subtitle">
+                Multi‑game servers · Rust · CS2 · MC
+              </div>
+            </div>
+          </div>
+          <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="servers.html" class="nav-link">Servers</a>
+            <a href="blog.html" class="nav-link active">Blog</a>
+            <a
+              href="admin.html"
+              class="nav-link nav-admin-pill"
+              style="display: none"
+              data-nav-admin
+              >Admin Panel</a
+            >
+          </nav>
+          <div class="nav-auth">
+            <a href="login.html" class="btn-primary" data-nav-login>
+              <span>Sign In</span>
+            </a>
+            <button
+              type="button"
+              class="avatar-pill"
+              data-nav-user
+              style="display: none"
+              data-nav-profile
+            >
+              <span class="avatar-initials" data-nav-initials>RZ</span>
+              <span>
+                <span data-nav-name>player</span>
+                <span class="avatar-role" data-nav-role>player</span>
+              </span>
+            </button>
+            <button
+              type="button"
+              class="btn-ghost"
+              data-nav-logout
+              style="display: none"
+            >
+              Log out
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="main">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1 class="page-title">Blog</h1>
+            <p class="page-description">
+              Updates, announcements, and news from the Rustaradise team.
+            </p>
+          </div>
+        </div>
+
+        <section class="blog-list">
+          <div class="card blog-card">
+            <div class="blog-card-meta">Feb 17, 2025 · Announcements</div>
+            <h2 class="blog-card-title">Welcome to the Rustaradise Blog</h2>
+            <p class="blog-card-excerpt">
+              This is where we'll share server updates, wipe schedules, community highlights,
+              and everything else you need to stay in the loop. Check back soon for more posts.
+            </p>
+            <a href="#" class="blog-card-link">Read more →</a>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <div>
+            © <span id="footer-year"></span> Rustaradise. All rights reserved.
+          </div>
+          <div>Rustaradise game server network.</div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+      document.getElementById("footer-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rustaradise · Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body onload="initLoginPage()">
+    <div class="page">
+      <header class="nav">
+        <div class="nav-inner">
+          <div class="brand">
+            <div class="brand-mark">RZ</div>
+            <div>
+              <div class="brand-text-title">Rustaradise</div>
+              <div class="brand-text-subtitle">
+                Multi‑game servers · Rust · CS2 · MC
+              </div>
+            </div>
+          </div>
+          <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="servers.html" class="nav-link">Servers</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+            <a
+              href="admin.html"
+              class="nav-link nav-admin-pill"
+              style="display: none"
+              data-nav-admin
+              >Admin Panel</a
+            >
+          </nav>
+          <div class="nav-auth">
+            <a href="login.html" class="btn-primary" data-nav-login>
+              <span>Sign In</span>
+            </a>
+            <button
+              type="button"
+              class="avatar-pill"
+              data-nav-user
+              style="display: none"
+              data-nav-profile
+            >
+              <span class="avatar-initials" data-nav-initials>RZ</span>
+              <span>
+                <span data-nav-name>player</span>
+                <span class="avatar-role" data-nav-role>player</span>
+              </span>
+            </button>
+            <button
+              type="button"
+              class="btn-ghost"
+              data-nav-logout
+              style="display: none"
+            >
+              Log out
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="main">
+        <div class="card" style="max-width: 420px; margin: 0 auto">
+          <div>
+            <h1 class="page-title" style="font-size: 18px">
+              Sign in to Rustaradise
+            </h1>
+          </div>
+
+          <form id="login-form" class="form" style="margin-top: 14px">
+            <div>
+              <div class="form-label">Username</div>
+              <input
+                name="username"
+                class="input-field"
+                placeholder="Username"
+              />
+            </div>
+            <div>
+              <div class="form-label">Password</div>
+              <input
+                type="password"
+                name="password"
+                class="input-field"
+                placeholder="Password"
+              />
+            </div>
+            <div
+              id="login-error"
+              style="font-size: 11px; color: #fecaca"
+            ></div>
+            <button type="submit" class="btn-primary" style="width: 100%">
+              Sign In
+            </button>
+            <p class="hint">
+              Don’t have an account? <a href="signup.html">Sign up</a>.
+            </p>
+          </form>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <div>
+            © <span id="footer-year"></span> Rustaradise. All rights reserved.
+          </div>
+          <div>Rustaradise game server network.</div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+      document.getElementById("footer-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+  </html>
+

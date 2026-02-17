@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rustaradise · Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body onload="initSettingsPage()">
+    <div class="page">
+      <header class="nav">
+        <div class="nav-inner">
+          <div class="brand">
+            <div class="brand-mark">RZ</div>
+            <div>
+              <div class="brand-text-title">Rustaradise</div>
+              <div class="brand-text-subtitle">
+                Multi‑game servers · Rust · CS2 · MC
+              </div>
+            </div>
+          </div>
+          <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="servers.html" class="nav-link">Servers</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+            <a
+              href="admin.html"
+              class="nav-link nav-admin-pill"
+              style="display: none"
+              data-nav-admin
+              >Admin Panel</a
+            >
+          </nav>
+          <div class="nav-auth">
+            <a href="login.html" class="btn-primary" data-nav-login>
+              <span>Sign In</span>
+            </a>
+            <button
+              type="button"
+              class="avatar-pill"
+              data-nav-user
+              style="display: none"
+              data-nav-profile
+            >
+              <span class="avatar-initials" data-nav-initials>RZ</span>
+              <span>
+                <span data-nav-name>player</span>
+                <span class="avatar-role" data-nav-role>player</span>
+              </span>
+            </button>
+            <button
+              type="button"
+              class="btn-ghost"
+              data-nav-logout
+              style="display: none"
+            >
+              Log out
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="main">
+        <div id="settings-logged-out" style="display: none">
+          <div class="card" style="max-width: 420px; margin: 0 auto">
+            <h1 class="page-title" style="font-size: 18px">
+              You’re not signed in
+            </h1>
+            <p class="page-description" style="font-size: 12px">
+              Sign in to manage your account settings.
+            </p>
+            <a href="login.html" class="btn-primary" style="margin-top: 10px">
+              Go to login
+            </a>
+          </div>
+        </div>
+
+        <div id="settings-content" style="display: none">
+          <section class="profile-header profile-header-compact">
+            <div class="profile-row">
+              <h1 class="page-title" style="margin: 0; font-size: 18px">
+                Account Settings
+              </h1>
+              <nav class="profile-tabs">
+                <a href="profile.html" class="profile-tab">Profile</a>
+                <a href="settings.html" class="profile-tab active">Settings</a>
+              </nav>
+            </div>
+          </section>
+
+          <div class="settings-grid">
+            <div class="card">
+              <div class="card-title">Change username</div>
+              <form id="settings-username-form" class="form" style="margin-top: 12px">
+                <div>
+                  <div class="form-label">Current username</div>
+                  <input
+                    type="text"
+                    class="input-field"
+                    id="settings-current-username"
+                    readonly
+                    style="opacity: 0.8"
+                  />
+                </div>
+                <div>
+                  <div class="form-label">New username</div>
+                  <input
+                    name="newUsername"
+                    class="input-field"
+                    placeholder="Enter new username"
+                  />
+                </div>
+                <div>
+                  <div class="form-label">Current password</div>
+                  <input
+                    type="password"
+                    name="currentPassword"
+                    class="input-field"
+                    placeholder="Enter password to confirm"
+                  />
+                </div>
+                <div id="settings-username-error" class="form-error"></div>
+                <div id="settings-username-success" class="form-success"></div>
+                <button type="submit" class="btn-primary">Update username</button>
+              </form>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Change password</div>
+              <form id="settings-password-form" class="form" style="margin-top: 12px">
+                <div>
+                  <div class="form-label">Current password</div>
+                  <input
+                    type="password"
+                    name="currentPassword"
+                    class="input-field"
+                    placeholder="Enter current password"
+                  />
+                </div>
+                <div>
+                  <div class="form-label">New password</div>
+                  <input
+                    type="password"
+                    name="newPassword"
+                    class="input-field"
+                    placeholder="Enter new password"
+                  />
+                </div>
+                <div>
+                  <div class="form-label">Confirm new password</div>
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    class="input-field"
+                    placeholder="Confirm new password"
+                  />
+                </div>
+                <div id="settings-password-error" class="form-error"></div>
+                <div id="settings-password-success" class="form-success"></div>
+                <button type="submit" class="btn-primary">Update password</button>
+              </form>
+            </div>
+
+            <div class="card card-danger">
+              <div class="card-title">Delete account</div>
+              <p class="hint" style="margin-top: 8px">
+                Permanently delete your account and all associated data. This cannot be undone.
+              </p>
+              <form id="settings-delete-form" class="form" style="margin-top: 12px">
+                <div>
+                  <div class="form-label">Enter your password to confirm</div>
+                  <input
+                    type="password"
+                    name="deletePassword"
+                    class="input-field"
+                    placeholder="Your password"
+                  />
+                </div>
+                <div id="settings-delete-error" class="form-error"></div>
+                <button type="submit" class="btn-danger">Delete my account</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <div>
+            © <span id="footer-year"></span> Rustaradise. All rights reserved.
+          </div>
+          <div>Rustaradise game server network.</div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+      document.getElementById("footer-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+</html>

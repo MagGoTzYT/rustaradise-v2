@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rustaradise · Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body onload="initProfilePage()">
+    <div class="page">
+      <header class="nav">
+        <div class="nav-inner">
+          <div class="brand">
+            <div class="brand-mark">RZ</div>
+            <div>
+              <div class="brand-text-title">Rustaradise</div>
+              <div class="brand-text-subtitle">
+                Multi‑game servers · Rust · CS2 · MC
+              </div>
+            </div>
+          </div>
+          <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="servers.html" class="nav-link">Servers</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+            <a
+              href="admin.html"
+              class="nav-link nav-admin-pill"
+              style="display: none"
+              data-nav-admin
+              >Admin Panel</a
+            >
+          </nav>
+          <div class="nav-auth">
+            <a href="login.html" class="btn-primary" data-nav-login>
+              <span>Sign In</span>
+            </a>
+            <button
+              type="button"
+              class="avatar-pill"
+              data-nav-user
+              style="display: none"
+              data-nav-profile
+            >
+              <span class="avatar-initials" data-nav-initials>RZ</span>
+              <span>
+                <span data-nav-name>player</span>
+                <span class="avatar-role" data-nav-role>player</span>
+              </span>
+            </button>
+            <button
+              type="button"
+              class="btn-ghost"
+              data-nav-logout
+              style="display: none"
+            >
+              Log out
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="main">
+        <div id="profile-logged-out" style="display: none">
+          <div class="card" style="max-width: 420px; margin: 0 auto">
+            <h1 class="page-title" style="font-size: 18px">
+              You’re not signed in
+            </h1>
+            <p class="page-description" style="font-size: 12px">
+              To manage your Rustaradise profile, sign in first.
+            </p>
+            <a href="login.html" class="btn-primary" style="margin-top: 10px">
+              Go to login
+            </a>
+          </div>
+        </div>
+
+        <div id="profile-content" style="display: none">
+          <section class="profile-header">
+            <div class="profile-banner">
+              <img
+                id="profile-banner-img"
+                alt="Profile banner"
+                style="display: none"
+              />
+              <div class="profile-banner-overlay"></div>
+            </div>
+            <div class="profile-row">
+              <div class="profile-avatar">
+                <span id="profile-avatar-initials">RZ</span>
+                <img
+                  id="profile-avatar-img"
+                  alt="Profile avatar"
+                  style="display: none"
+                />
+              </div>
+              <div class="profile-meta">
+                <div class="profile-name" id="profile-name">player</div>
+                <div class="profile-role" id="profile-role">
+                  Rustaradise Player
+                </div>
+              </div>
+              <nav class="profile-tabs">
+                <a href="profile.html" class="profile-tab active">Profile</a>
+                <a href="settings.html" class="profile-tab">Settings</a>
+              </nav>
+            </div>
+          </section>
+
+          <section class="layout-split">
+            <div class="card">
+              <div class="card-title">Profile Settings</div>
+              <form
+                id="profile-form"
+                class="form"
+                style="margin-top: 12px"
+              >
+                <div>
+                  <div class="form-label">Profile picture</div>
+                  <div class="file-input-wrap">
+                    <label class="file-input-trigger" for="avatar-file">Choose image</label>
+                    <input
+                      type="file"
+                      name="avatarFile"
+                      id="avatar-file"
+                      accept=".jpg,.jpeg,image/jpeg"
+                    />
+                    <span class="file-input-filename" id="avatar-filename">No file chosen</span>
+                  </div>
+                  <p class="hint">
+                    JPG only. Square images (256×256) work best.
+                  </p>
+                </div>
+                <div>
+                  <div class="form-label">Banner image</div>
+                  <div class="file-input-wrap">
+                    <label class="file-input-trigger" for="banner-file">Choose image</label>
+                    <input
+                      type="file"
+                      name="bannerFile"
+                      id="banner-file"
+                      accept=".jpg,.jpeg,image/jpeg"
+                    />
+                    <span class="file-input-filename" id="banner-filename">No file chosen</span>
+                  </div>
+                  <p class="hint">
+                    JPG only. Wide landscape images look best.
+                  </p>
+                </div>
+                <div>
+                  <div class="form-label">Short bio</div>
+                  <textarea
+                    name="bio"
+                    class="textarea-field"
+                    placeholder="A short line about who you are."
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn-primary">
+                  Save changes
+                </button>
+                <p
+                  id="profile-saved"
+                  class="hint"
+                  style="display: none; color: #bbf7d0"
+                >
+                  Your changes have been saved.
+                </p>
+              </form>
+            </div>
+
+            <div class="card" style="font-size: 11px">
+              <div class="card-title">Profile</div>
+              <ul style="margin-top: 10px; padding-left: 18px">
+                <li style="margin-bottom: 6px">
+                  Update your avatar, banner and bio anytime. Changes apply immediately.
+                </li>
+                <li style="margin-bottom: 6px">
+                  Staff accounts show a staff badge across the site.
+                </li>
+              </ul>
+              <hr
+                style="border-color: rgba(148, 163, 184, 0.4); margin: 12px 0"
+              />
+              <div>
+                <div class="form-label">Current bio</div>
+                <p id="profile-bio" class="hint">
+                  Welcome to Rustaradise.
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <div>
+            © <span id="footer-year"></span> Rustaradise. All rights reserved.
+          </div>
+          <div>Rustaradise game server network.</div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+      document.getElementById("footer-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+  </html>
+

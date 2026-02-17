@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rustaradise · Server Browser &amp; Analytics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body onload="initServersPage()">
+    <div class="page">
+      <header class="nav">
+        <div class="nav-inner">
+          <div class="brand">
+            <div class="brand-mark">RZ</div>
+            <div>
+              <div class="brand-text-title">Rustaradise</div>
+              <div class="brand-text-subtitle">
+                Multi‑game servers · Rust · CS2 · MC
+              </div>
+            </div>
+          </div>
+          <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="servers.html" class="nav-link active">Servers</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+            <a
+              href="admin.html"
+              class="nav-link nav-admin-pill"
+              style="display: none"
+              data-nav-admin
+              >Admin Panel</a
+            >
+          </nav>
+          <div class="nav-auth">
+            <a href="login.html" class="btn-primary" data-nav-login>
+              <span>Sign In</span>
+            </a>
+            <button
+              type="button"
+              class="avatar-pill"
+              data-nav-user
+              style="display: none"
+              data-nav-profile
+            >
+              <span class="avatar-initials" data-nav-initials>RZ</span>
+              <span>
+                <span data-nav-name>player</span>
+                <span class="avatar-role" data-nav-role>player</span>
+              </span>
+            </button>
+            <button
+              type="button"
+              class="btn-ghost"
+              data-nav-logout
+              style="display: none"
+            >
+              Log out
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="main">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1 class="page-title">Server Browser &amp; Analytics</h1>
+            <p class="page-description">
+              Overview of all Rustaradise servers across Rust, CS2, Minecraft and more.
+            </p>
+          </div>
+          <div class="stats-bar">
+            <div class="stat-block stat-live">
+              <span class="stat-value" id="servers-live-players-value">0</span>
+              <span class="stat-label">Players online now</span>
+            </div>
+            <div class="stat-block">
+              <span class="stat-value" id="servers-count">0</span>
+              <span class="stat-label">Servers</span>
+            </div>
+          </div>
+        </div>
+
+        <section class="hero-grid">
+          <div>
+            <div class="card">
+              <div class="filters-row">
+                <input
+                  id="servers-search"
+                  class="input-text"
+                  type="text"
+                  placeholder="Search by server name, map, or mode..."
+                />
+                <button class="btn-pill active" data-region="all">All regions</button>
+                <button class="btn-pill" data-region="EU">EU</button>
+                <button class="btn-pill" data-region="NA">NA</button>
+              </div>
+              <div class="filters-row">
+                <button class="btn-pill active" data-game="all">
+                  All games
+                </button>
+                <button class="btn-pill" data-game="Rust">Rust</button>
+                <button class="btn-pill" data-game="CS2">CS2</button>
+                <button class="btn-pill" data-game="Minecraft">Minecraft</button>
+                <button class="btn-pill" data-game="Other">Other</button>
+              </div>
+
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Server</th>
+                      <th>Map / Game</th>
+                      <th>Players</th>
+                      <th>Region</th>
+                      <th>Latency</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="servers-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <aside class="analytics-aside">
+            <div class="card-title">Network Analytics</div>
+            <p class="card-subtitle" style="margin-top: 4px">
+              High‑level overview of player population and reliability across
+              the Rustaradise network.
+            </p>
+
+            <div class="analytics-section">
+              <div class="analytics-label-row">
+                <span>Network population</span>
+                <span id="analytics-population-label">0/0</span>
+              </div>
+              <div class="bar-track" style="margin-top: 6px">
+                <div
+                  class="bar-fill"
+                  id="analytics-population-bar"
+                  style="width: 0%"
+                ></div>
+              </div>
+              <div class="analytics-sm">
+                Utilisation over all online servers right now.
+              </div>
+            </div>
+
+            <div class="analytics-section">
+              <div class="analytics-label-row">
+                <span>Avg uptime (7d)</span>
+                <span id="analytics-uptime-label">0%</span>
+              </div>
+              <div class="mini-bars" id="analytics-uptime-bars"></div>
+              <div class="mini-bars-labels" id="analytics-uptime-bars-labels">
+              </div>
+              <div class="analytics-sm">
+                Each bar represents uptime for a single server in the cluster.
+              </div>
+            </div>
+
+            <div class="grid-two">
+              <div class="tile">
+                <div class="tile-label">Peak (24h)</div>
+                <div class="tile-value" id="analytics-peak">0</div>
+                <div class="analytics-sm">players across network</div>
+              </div>
+              <div class="tile">
+                <div class="tile-label">Average load</div>
+                <div class="tile-value" id="analytics-avg-load">0</div>
+                <div class="analytics-sm">players per server (24h)</div>
+              </div>
+            </div>
+
+            <div class="analytics-section">
+              <div class="analytics-label-row">
+                <span>By game (24h avg)</span>
+              </div>
+              <div class="analytics-sm" id="analytics-by-game">
+                Rust: — · CS2: — · Minecraft: — · Other: — avg players / server
+                (24h)
+              </div>
+            </div>
+          </aside>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <div>
+            © <span id="footer-year"></span> Rustaradise. All rights reserved.
+          </div>
+          <div>
+            Numbers that are useful at a glance, without turning your homepage
+            into a dashboard.
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+      document.getElementById("footer-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+  </html>
+

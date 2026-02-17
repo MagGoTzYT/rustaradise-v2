@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rustaradise · Admin Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body onload="initAdminPage()">
+    <div class="page">
+      <header class="nav">
+        <div class="nav-inner">
+          <div class="brand">
+            <div class="brand-mark">RZ</div>
+            <div>
+              <div class="brand-text-title">Rustaradise</div>
+              <div class="brand-text-subtitle">
+                Multi‑game servers · Rust · CS2 · MC
+              </div>
+            </div>
+          </div>
+          <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="servers.html" class="nav-link">Servers</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+            <a
+              href="admin.html"
+              class="nav-link nav-admin-pill active"
+              data-nav-admin
+              >Admin Panel</a
+            >
+          </nav>
+          <div class="nav-auth">
+            <a href="login.html" class="btn-primary" data-nav-login>
+              <span>Sign In</span>
+            </a>
+            <button
+              type="button"
+              class="avatar-pill"
+              data-nav-user
+              style="display: none"
+              data-nav-profile
+            >
+              <span class="avatar-initials" data-nav-initials>RZ</span>
+              <span>
+                <span data-nav-name>player</span>
+                <span class="avatar-role" data-nav-role>player</span>
+              </span>
+            </button>
+            <button
+              type="button"
+              class="btn-ghost"
+              data-nav-logout
+              style="display: none"
+            >
+              Log out
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="main">
+        <div id="admin-denied" style="display: none">
+          <div class="card" style="max-width: 460px; margin: 0 auto">
+            <div class="alert">
+              <p style="font-weight: 600">Admin access required</p>
+              <p>
+                This panel is only visible to trusted Rustaradise staff
+                accounts. Sign in with an admin username such as
+                <span style="font-family: monospace; color: #facc15">admin</span>
+                or
+                <span style="font-family: monospace; color: #facc15"
+                  >rustaradise</span
+                >
+                to continue.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="admin-content" style="display: none">
+          <header class="page-header">
+            <div class="page-title-group">
+              <h1 class="page-title">Rustaradise Admin Panel</h1>
+              <p class="page-description">
+                Lightweight controls for adjusting player caps, toggling server
+                visibility, and shaping the analytics you expose to players—
+                only for you and the people you trust.
+              </p>
+            </div>
+            <div class="badge badge-staff">Staff</div>
+          </header>
+
+          <section class="card admin-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Server Controls</div>
+                <div class="card-subtitle">
+                  Server list from integrations. Player counts and status are fetched from the Live data URL—no manual entry.
+                </div>
+              </div>
+              <button type="button" class="admin-btn" id="admin-refresh-servers">Refresh</button>
+            </div>
+
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Server</th>
+                    <th>Players / Max</th>
+                    <th>Queue</th>
+                    <th>Latency</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-body"></tbody>
+              </table>
+            </div>
+
+            <div id="admin-note" class="note" style="margin-top: 10px">
+              Data from Live data URL. Configure in Integrations below.
+            </div>
+          </section>
+
+          <section class="card" style="margin-top: 20px">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Integrations</div>
+                <div class="card-subtitle">
+                  Capture where Rustaradise should talk to RCON, IW4MAdmin and
+                  any other tooling you rely on.
+                </div>
+              </div>
+            </div>
+
+            <div class="layout-split" style="margin-top: 12px">
+              <form id="integrations-form" class="form">
+                <div>
+                  <div class="form-label">Live data URL</div>
+                  <input
+                    name="liveDataUrl"
+                    class="input-field"
+                    placeholder="https://your-backend.com/api/servers"
+                  />
+                  <p class="hint">
+                    JSON endpoint returning <code>{"servers": [{"id": "rust-eu-1", "players": 50, "maxPlayers": 200, "status": "online"}]}</code>. Match server <code>id</code> to your server list. Player counts and status update automatically.
+                  </p>
+                </div>
+                <div>
+                  <div class="form-label">RCON</div>
+                  <label class="hint" style="display: block; margin-bottom: 4px">
+                    <input type="checkbox" name="rconEnabled" />
+                    Enable RCON integration
+                  </label>
+                  <div style="display: flex; gap: 6px; margin-bottom: 6px">
+                    <input
+                      name="rconHost"
+                      class="input-field"
+                      placeholder="Host (e.g. 127.0.0.1)"
+                    />
+                    <input
+                      name="rconPort"
+                      class="input-field"
+                      style="max-width: 90px"
+                      placeholder="Port"
+                    />
+                  </div>
+                  <textarea
+                    name="rconNote"
+                    class="textarea-field"
+                    placeholder="Notes (provider, password location, etc.)"
+                  ></textarea>
+                </div>
+
+                <div>
+                  <div class="form-label">IW4MAdmin</div>
+                  <label class="hint" style="display: block; margin-bottom: 4px">
+                    <input type="checkbox" name="iw4Enabled" />
+                    Enable IW4MAdmin integration
+                  </label>
+                  <input
+                    name="iw4Url"
+                    class="input-field"
+                    placeholder="Dashboard/API URL"
+                  />
+                  <textarea
+                    name="iw4Note"
+                    class="textarea-field"
+                    placeholder="How this should hook into bans, logs, or player stats."
+                  ></textarea>
+                </div>
+
+                <div>
+                  <div class="form-label">Other tooling</div>
+                  <label class="hint" style="display: block; margin-bottom: 4px">
+                    <input type="checkbox" name="otherEnabled" />
+                    Track another integration
+                  </label>
+                  <input
+                    name="otherLabel"
+                    class="input-field"
+                    placeholder="Name (e.g. Prometheus, custom panel)"
+                  />
+                  <textarea
+                    name="otherNote"
+                    class="textarea-field"
+                    placeholder="Anything you and staff should remember about setup or endpoints."
+                  ></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                  Save integrations
+                </button>
+                <p
+                  id="integrations-status"
+                  class="hint"
+                  style="margin-top: 6px"
+                >
+                  Configure RCON, IW4MAdmin and other tools. Settings are saved when you click Save.
+                </p>
+              </form>
+
+              <div class="hint">
+                <strong>How it works</strong>
+                <ul class="section-list" style="margin-top: 4px">
+                  <li><strong>Live data URL</strong> — Your backend fetches from RCON, IW4MAdmin, etc. and exposes a JSON endpoint. Rustaradise fetches it automatically.</li>
+                  <li>Server list and analytics are populated from integrations—no manual typing of player counts or status.</li>
+                  <li>Use RCON/IW4MAdmin fields to store connection details for your backend.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <div>
+            © <span id="footer-year"></span> Rustaradise. All rights reserved.
+          </div>
+          <div>
+            Built for colleagues and staff to work quickly without ever
+            exposing internals to players.
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+      document.getElementById("footer-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+  </html>
+

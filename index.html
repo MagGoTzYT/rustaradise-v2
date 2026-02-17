@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rustaradise · Game Servers &amp; Analytics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body onload="initHomePage()">
+    <div class="page">
+      <header class="nav">
+        <div class="nav-inner">
+          <div class="brand">
+            <div class="brand-mark">RZ</div>
+            <div>
+              <div class="brand-text-title">Rustaradise</div>
+              <div class="brand-text-subtitle">
+                Multi‑game servers · Rust · CS2 · MC
+              </div>
+            </div>
+          </div>
+          <nav class="nav-links">
+            <a href="index.html" class="nav-link active">Home</a>
+            <a href="servers.html" class="nav-link">Servers</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+            <a
+              href="admin.html"
+              class="nav-link nav-admin-pill"
+              style="display: none"
+              data-nav-admin
+              >Admin Panel</a
+            >
+          </nav>
+          <div class="nav-auth">
+            <a href="login.html" class="btn-primary" data-nav-login>
+              <span>Sign In</span>
+            </a>
+            <button
+              type="button"
+              class="avatar-pill"
+              data-nav-user
+              style="display: none"
+              data-nav-profile
+            >
+              <span class="avatar-initials" data-nav-initials>RZ</span>
+              <span>
+                <span data-nav-name>player</span>
+                <span class="avatar-role" data-nav-role>player</span>
+              </span>
+            </button>
+            <button
+              type="button"
+              class="btn-ghost"
+              data-nav-logout
+              style="display: none"
+            >
+              Log out
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="main">
+        <section class="hero-grid">
+          <div>
+            <div class="hero-pill">
+              Rust · CS2 · Minecraft · More
+            </div>
+            <h1 class="hero-title">
+              Your home for <span>Rustaradise</span> game servers.
+            </h1>
+            <p class="hero-text">
+              A clean, human‑designed control panel for your community.
+              Bookmark once, use it every day to browse servers, track
+              performance, and keep your players in the loop without any
+              clutter.
+            </p>
+            <div class="hero-actions">
+              <a href="servers.html" class="btn-primary">
+                <span>View Server List</span>
+                <span id="home-server-count" class="hero-count">0</span>
+              </a>
+              <a href="login.html" class="btn-ghost"> Player Profiles </a>
+            </div>
+            <div class="hero-metrics">
+              <div class="metric-card">
+                <div class="metric-label">Featured servers</div>
+                <div class="metric-value">3</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Avg network latency</div>
+                <div class="metric-value" id="home-avg-latency">~0ms</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Peak population (24h)</div>
+                <div class="metric-value" id="home-peak">0</div>
+              </div>
+            </div>
+
+            <div class="featured-games">
+              <div class="featured-game-card">
+                <div class="featured-game-name">Rust Cluster</div>
+                <div class="featured-game-tag">Main focus</div>
+                <p class="featured-game-body">
+                  Wipe‑based vanilla and 2x servers, tuned for low ping and
+                  consistent performance. The Rustaradise name lives here first.
+                </p>
+              </div>
+              <div class="featured-game-card">
+                <div class="featured-game-name">Counter‑Strike 2</div>
+                <div class="featured-game-tag">Aim &amp; retakes</div>
+                <p class="featured-game-body">
+                  128‑tick Mirage hubs and focused retake servers so your
+                  community can warm up, practice, and stack queues together.
+                </p>
+              </div>
+              <div class="featured-game-card">
+                <div class="featured-game-name">Minecraft</div>
+                <div class="featured-game-tag">Chill survival</div>
+                <p class="featured-game-body">
+                  A seasonal survival world with protections and light QoL, for
+                  when your Rust and CS2 players want to wind down.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Live Server Snapshot</div>
+                <div class="card-subtitle">
+                  Rust + CS2 + Minecraft servers in one clean list.
+                </div>
+              </div>
+              <div class="live-pill">
+                <span class="live-dot"></span>
+                Live
+              </div>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Server</th>
+                    <th>Players</th>
+                    <th>Region</th>
+                    <th>Ping</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="home-servers-body"></tbody>
+              </table>
+            </div>
+            <p class="muted" style="margin-top: 10px">
+              For full analytics, uptime history, and per‑game breakdowns, head
+              over to the dedicated <a href="servers.html">servers page</a>.
+            </p>
+          </div>
+        </section>
+
+        <section class="section">
+          <div>
+            <h2 class="section-title">Built to be your main hub</h2>
+            <p class="section-text">
+              Rustaradise is designed to feel like a proper homepage for your
+              community, not a throwaway panel. It stays minimal, but leaves
+              room for you to grow into more integrations over time.
+            </p>
+            <ul class="section-list">
+              <li>Server list that looks good even when it’s half‑full.</li>
+              <li>
+                Profile pages players can tweak themselves without needing
+                support tickets.
+              </li>
+              <li>
+                A private admin surface where only you and staff can tune
+                players, status, and queues.
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="section-title">Community &amp; support</div>
+            <p class="section-text">
+              Join our Discord, get in touch, or check server status.
+            </p>
+            <div style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap">
+              <a href="#" class="pill-link">
+                <span>◎</span>
+                <span>Discord</span>
+              </a>
+              <a href="mailto:contact@rustaradise.gg" class="pill-link">
+                <span>✉</span>
+                <span>contact@rustaradise.gg</span>
+              </a>
+              <a href="#" class="pill-link">
+                <span>☁</span>
+                <span>Status</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <div>
+            © <span id="footer-year"></span> Rustaradise. All rights reserved.
+          </div>
+          <div>
+            Hand‑tuned for clarity and speed, so your players never have to
+            fight the website.
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+      document.getElementById("footer-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+</html>
+
